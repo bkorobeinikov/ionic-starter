@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Users</ion-title>
+
+        <ion-buttons left>
+            <button ion-button icon-only (click)="refresh()">
+                <ion-icon name="refresh"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-buttons right>
+            <button ion-button (click)="refreshForce()">
+                Force Refresh
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <ion-item *ngFor="let user of users$ | async">
+            <h2>{{user.name}}</h2>
+            <h3>{{user.email}}</h3>
+            <p>Works for {{user.company.name}}</p>
+        </ion-item>
+    </ion-list>
+    <ion-spinner *ngIf="(usersLoadingOp$ | async)?.pending"></ion-spinner>
+</ion-content>
